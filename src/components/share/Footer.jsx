@@ -7,14 +7,14 @@ export default function Footer() {
     return (
         <footer className='md:block hidden'>
             <div className='bg-black '>
-                <div className='w-[90%] mx-auto flex gap-20 justify-between items-center py-10 text-white'>
-                    <div className='w-1/5'>
+                <div className='w-[90%] mx-auto flex lg:flex-row flex-col gap-20 justify-between items-center py-10 text-white'>
+                    <div className='lg:w-1/5 w-full'>
                         <Image src={Logo1} alt='logo1' className='border-2 border-primary rounded-xl p-2' />
                         <div className=' mt-3'>
                             <p className='text-justify'>Lorem ipsum dolor sit amet consectetur. Vitae proin eleifend risus turpis et dignissim etiam. Eget semper pellentesque sed eget.Lorem ipsum dolor sit amet consectetur. Vitae proin eleifend risus turpis et dignissim etiam. Eget semper pellentesque sed eget.Vitae proin eleifend risus turpis et dignissim etiam. Eget semper pellentesque sed eget.</p>
                         </div>
                     </div>
-                    <div className='w-4/5 flex justify-between'>
+                    <div className='lg:w-4/5 w-full  flex justify-between'>
                         <div className='text-[18px] flex justify-between w-[55%]'>
                             <div>
                                 <h1 className='font-bold'>links</h1>
@@ -93,11 +93,11 @@ export default function Footer() {
                     <p>&copy; 2024 eProfiles</p>
 
                     <div className='flex gap-3 justify-center'>
-                        <Image src={Visa} alt='visa' width={40} height={10} />
-                        <Image src={Master} alt='visa' width={40} height={20} />
-                        <Image src={American} alt='visa' width={40} height={20} />
-                        <Image src={Payoneer} alt='visa' width={40} height={20} />
-                        <Image src={Stripe} alt='visa' width={40} height={20} />
+                        <Image src={Visa} alt='visa1' width={40} height={10} />
+                        <Image src={Master} alt='visa2' width={40} height={20} />
+                        <Image src={American} alt='visa3' width={40} height={20} />
+                        <Image src={Payoneer} alt='visa4' width={40} height={20} />
+                        <Image src={Stripe} alt='visa5' width={40} height={20} />
                     </div>
                     <div className='flex gap-1'>
                         <Link href='#'>Terms & conditions</Link>

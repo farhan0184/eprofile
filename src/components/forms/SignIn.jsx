@@ -1,14 +1,22 @@
 "use client"
-
+import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import React from 'react'
 import { Form } from '../ui/form'
 import CustomInput from '../share/CustomInput'
 import CustomBtn from '../share/CustomBtn'
 import Link from "next/link"
-import FormQns from "../share/FormQns"
+
+import { api } from "@/api"
+import { toast } from "sonner"
+
+import {  useRouter } from "next/navigation"
+import { useAuthStore } from '@/store/userStore'
+import { axiosBase } from '@/hooks/axiosSecure'
+
+
+
 
 
 
@@ -21,7 +29,9 @@ const formSchema = z.object({
     }),
 })
 
-export default function SignIn() {
+export default function SignIn() { 
+    const { setLogin}=useAuthStore()
+    const router = useRouter()
     // 1. Define your form.
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -32,11 +42,26 @@ export default function SignIn() {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    async function  onSubmit(values) {
+
+        try {
+            const res = await axiosBase.post('/auth/login', values)
+            if(res.data.statusCode === 200){
+                
+                setLogin(res.data.data)
+                toast.success(res.data.message, {
+                    action: {
+                        label: 'X',
+                        onClick: () => console.log('Undo')
+                    },
+                })
+                router.push('/dashboard')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
+    // console.log(isLogin)
     return (
         <Form {...form} className=''>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
