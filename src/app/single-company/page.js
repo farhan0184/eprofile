@@ -10,7 +10,7 @@ import SingleProfilesContact from "@/Components/SingleProfile/SingleProfilesCont
 import ReviewSummary from "@/Components/SingleProfile/ReviewSummary";
 import Container from "@/components/share/Container";
 
-const SingleService = () => {
+const SingleCompany = () => {
   return (
     <div>
       {/* headers */}
@@ -132,4 +132,4 @@ const SingleService = () => {
   );
 };
 
-export default SingleService;
+export default SingleCompany;
