@@ -11,8 +11,8 @@ export default function CompanyName({setValue,company,setCompany}) {
     const [data, setData] = React.useState({
         name: '',
         username: '',
-        companyPhoto: null,
-        companyCoverPhoto:  null
+        photo: null,
+        coverPhoto:  null
     })
 
     // const [coverImg, setCoverImg] = useState(null)
@@ -30,7 +30,7 @@ export default function CompanyName({setValue,company,setCompany}) {
         const file = e.target.files[0];
         setData({
             ...data,
-            companyCoverPhoto: file
+            coverPhoto: file
         })
 
     }
@@ -38,7 +38,7 @@ export default function CompanyName({setValue,company,setCompany}) {
         const file = e.target.files[0];
         setData({
             ...data,
-            companyPhoto: file
+            photo: file
         })
     }
 
@@ -51,8 +51,7 @@ export default function CompanyName({setValue,company,setCompany}) {
 
     useEffect(() => {
         if(company){
-            setData({...data, name: company?.name, username:  company?.username  })
-            // companyPhoto: company?.companyPhoto, companyCoverPhoto: company?.companyCoverPhoto
+            setData({...data, name: company?.name, username:  company?.username, photo: company?.photo, coverPhoto: company?.coverPhoto})
         }
     },[company])
     return (
@@ -60,18 +59,18 @@ export default function CompanyName({setValue,company,setCompany}) {
             {/* image section */}
             <div className='relative'>
                 <div className='md:h-[35vh] h-[25vh] w-full bg-slate-300 rounded-xl relative'>
-                    {data?.companyCoverPhoto && <Image src={URL.createObjectURL(data.companyCoverPhoto)} alt='cover image' width={600} height={100} className='absolute top-0 h-full w-full rounded-xl object-cover' />}
+                    {data?.coverPhoto && <Image src={URL.createObjectURL(data.coverPhoto)} alt='cover image' width={600} height={100} className='absolute top-0 h-full w-full rounded-xl object-cover' />}
                 </div>
                 <div onClick={handlePersonImgClk} className='bg-slate-300 md:w-[170px] w-[120px] md:h-[170px] h-[120px] rounded-full absolute md:-bottom-[4.8rem] -bottom-[3rem] md:left-1/2 md:-translate-x-1/2 left-5'>
-                    <input type="file" name="companyPhoto" className='hidden' ref={personImgRef} onChange={handlePersonImgCng} />
-                    {data?.companyPhoto && <Image src={URL.createObjectURL(data.companyPhoto)} alt='person' width={100} height={100} className='w-full h-full rounded-full  object-cover' />}
+                    <input type="file" name="photo" className='hidden' ref={personImgRef} onChange={handlePersonImgCng} />
+                    {data?.photo && <Image src={URL.createObjectURL(data.photo)} alt='person' width={100} height={100} className='w-full h-full rounded-full  object-cover' />}
                     <div className='text-primary absolute bottom-0 right-4 p-1 rounded-full bg-[#ffe8d9]'>
                         <Camera />
                     </div>
-                    {!data.companyPhoto && <Image src={PIcon} alt='person' width={100} height={100} className='w-full h-full rounded-full ' />}
+                    {!data.photo && <Image src={PIcon} alt='person' width={100} height={100} className='w-full h-full rounded-full ' />}
                 </div>
                 <div onClick={handleImgClk} className='absolute lg:bottom-2  right-2 bottom-2'>
-                    <input type="file" name="companyCoverPhoto" className='hidden' ref={imgRef} onChange={handleImgCng} />
+                    <input type="file" name="coverPhoto" className='hidden' ref={imgRef} onChange={handleImgCng} />
                     <div className='flex gap-2 items-center text-primary bg-[#ffe8d9] w-max p-2 rounded-md md:text-[16px] text-[12px]'>
                         <Camera />
                         <p>Add Cover Photo</p>
