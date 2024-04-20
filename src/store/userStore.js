@@ -65,7 +65,7 @@ export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
     error: null,
     loading: false,
     profileData: null,
-    setUserProfile: async (data) => {
+    setUserProfile: async (formData) => {
         set((state) => { state.loading = true })
         try {
             const res = await axiosBase.post("/profile", formData, {

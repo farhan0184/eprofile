@@ -4,6 +4,7 @@ import GroupBtn from '../../share/GroupBtn'
 import ProfileInput from '../../share/ProfileInput'
 import { ProfileHeader } from '../..'
 import CustomBtn from '@/components/share/CustomBtn'
+import moment from 'moment'
 
 export default function WorkExperience({ setValue, profile, setProfile, profileData, updateProfile, userId }) {
     // profile?.experience ||
@@ -73,7 +74,7 @@ export default function WorkExperience({ setValue, profile, setProfile, profileD
                 <div className=' space-y-4'>
                     <ProfileInput type={'text'} name={'company'} value={val.company} label={'Company Name'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                     <ProfileInput type={'text'} name={'jobTitle'} value={val.jobTitle} label={'Job Title'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
-                    <ProfileInput type={'date'} name={'dateOfEmployment'} value={val.dateOfEmployment} label={'Dates Of Employment'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
+                    <ProfileInput type={'date'} name={'dateOfEmployment'} value={moment(val.dateOfEmployment).format("YYYY-MM-DD")} label={'Dates Of Employment'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                     <ProfileInput type={'text'} name={'responsibilities'} value={val.responsibilities} label={'Responsibilities'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                 </div>
                 <CustomBtn style={'p-0 w-8 rounded-full h-8 absolute -top-2 right-2'} title={'X'} click={() => handleDelete(i, true)} />

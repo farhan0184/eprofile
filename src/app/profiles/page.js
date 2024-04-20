@@ -1,7 +1,7 @@
 "use client"
 
 import Container from "@/components/share/Container";
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import user1 from "../../assets/profiles/user-1.png";
 import user2 from "../../assets/profiles/user-2.png";
@@ -12,20 +12,19 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import Ratings from "@/components/Ratings/Ratings";
 import Link from "next/link";
-import {axiosBase} from '@/hooks/axiosSecure'
+import { axiosBase } from '@/hooks/axiosSecure'
 
 const Profiles = () => {
   const [profiles, setProfiles] = React.useState([]);
 
-  useEffect(()=>{
-    const fetchData=async()=>{
-     const res= await axiosBase.get('/profile')
-
-     setProfiles(res.data?.data)
-    }
-
-    fetchData()
-  },[])
+  useEffect(() => {
+    axiosBase.get("/profile")
+      .then((res) => {
+        setProfiles(res?.data?.data);
+      }).catch((error) => {
+        console.log(error);
+    })
+  }, [])
   return (
     <div>
       <Container>
@@ -60,7 +59,7 @@ const Profiles = () => {
 
         <main className="mb-7">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-10">
-            {profiles?.map(
+            {!profiles ? <div className="max-h-screen center text-lg w-full">No Profiles Found</div> : profiles?.map(
               (item, i) => (
                 <div key={i} className="border">
                   <div className="p-">
@@ -81,7 +80,7 @@ const Profiles = () => {
                           {item?.fullName}
                         </h2>
                         <h3 className="font-medium text-[15px] text-[#000000]">
-                          {item?.title[0]?.designation|| "Designation"}
+                          {item?.title[0]?.designation || "Designation"}
                         </h3>
 
                         <div className="flex items-center gap-2">

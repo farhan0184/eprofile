@@ -23,10 +23,11 @@ export default function Goals({ setValue, profile, setProfile, userId, profileDa
     };
     const handleNext = async () => {
         if (!profileData) {
-            const values = { ...profile, careerGoals: data };
+            const values = { ...profile, careerGoals: data,  };
             const formData = jsonToFormData(values);
             const res = await setUserProfile(formData)
-            if (res.data.statusCode === 200) {
+            console.log(res)
+            if (res?.data.statusCode === 200) {
 
                 setProfile(values)
                 setValue('name')

@@ -84,8 +84,8 @@ export default function TiTle({ setValue, profile, setProfile, profileData, upda
                     </div>
                     <div className='doubleInput'>
 
-                        <ProfileInput type={'date'} value={val.startDate || ''} name={'startDate'} label={'Start date'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
-                        <ProfileInput type={'date'} value={val.endDate} name={'endDate'} label={'End date'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
+                        <ProfileInput type={'date'} value={moment(val.startDate).format("YYYY-MM-DD")} name={'startDate'} label={'Start date'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
+                        <ProfileInput type={'date'} value={moment(val.endDate).format("YYYY-MM-DD")} name={'endDate'} label={'End date'} isStar={false} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                     </div>
                     <ProfileTextArea label={'Responsibilities'} value={val.responsibilities} name={'responsibilities'} isStar={false} style={'profileInput p-3 h-24'} change={(e) => handleChange(e, i)} />
                     <CustomBtn style={'p-0 w-8 rounded-full h-8 absolute -top-2 right-2'} title={'X'} click={() => handleDelete(i)} />

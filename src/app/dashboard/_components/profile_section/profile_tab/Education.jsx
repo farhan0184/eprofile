@@ -5,6 +5,7 @@ import CustomBtn from '@/components/share/CustomBtn'
 import ProfileInput from '../../share/ProfileInput'
 import { ProfileHeader } from '../..'
 import { jsonToFormData } from '@/lib/utils'
+import moment from 'moment'
 
 
 export default function Education({ setValue, profile, setProfile, profileData, updateProfile, userId }) {
@@ -84,7 +85,7 @@ export default function Education({ setValue, profile, setProfile, profileData, 
                             </div>
                         </div>
                         <div className='w-[30%] space-y-4'>
-                            <ProfileInput type={'date'} value={val.passingYear || ''} name={'passingYear'} label={'Passing Year'} isStar={true} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
+                            <ProfileInput type={'date'} value={moment(val.passingYear).format("YYYY-MM-DD")} name={'passingYear'} label={'Passing Year'} isStar={true} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                             <div>
                                 <ProfileInput type={'text'} value={val.duration} name={'duration'} label={'Duration'} isStar={true} style={'profileInput h-12'} change={(e) => handleChange(e, i)} />
                             </div>

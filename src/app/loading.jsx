@@ -4,6 +4,8 @@ import React from 'react'
 
 export default function loading() {
     return (
-        <LoaderPage/>
+        <div className='h-screen center'>
+            <LoaderPage />
+        </div>
     )
 }
