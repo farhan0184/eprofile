@@ -156,4 +156,27 @@ export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
 }))))
 
 
+export const useCompanyStore = create(immer((set) => ({
+    error: null,
+    loading: false,
+    companyData: null,
+    getCompanies: async () => {
+        set((state) => { state.loading = true })
+        try {
+            const res = await axiosBase.get("/companies/my-companies")
+            set((state) => {
+                state.companyData = res?.data?.data,
+                state.loading = false
+            })
+            return res
+
+        } catch (error) {
+            set((state) => ({ error: error, loading: false }));
+            return
+        }
+    }
+})))
+
+
+
 

@@ -2,16 +2,20 @@
 import SideBar from '@/app/dashboard/_components/share/SideBar'
 import LoaderPage from '@/components/share/LoaderPage'
 
-import { useProfileStore } from '@/store/userStore'
+import { useCompanyStore, useProfileStore } from '@/store/userStore'
 import React, { Suspense, useEffect } from 'react'
 
 export default function DashboardLayout({ child }) {
     const { profileData, getProfile } = useProfileStore()
+    const {getCompanies} = useCompanyStore()
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'))
         getProfile(user?.id)
     }, [])
+    useEffect(() => {
+        getCompanies()
+    },[])
     return (
         <div className='flex ' suppressHydrationWarning={true}>
             <SideBar />
