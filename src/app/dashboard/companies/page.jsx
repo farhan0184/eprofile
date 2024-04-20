@@ -29,7 +29,7 @@ export default function Companies() {
                 {loading ? <div className='h-screen'>
                     <LoaderPage />
                 </div> : companyData?.map((item, idx) => (
-                    <div className=''>
+                    <div key={idx} className=''>
                         <div className='border-[1px] flex md:flex-row flex-col rounded-lg'>
                             <div className='flex md:w-1/2 w-full'>
                                 <div className='border-r-[1px] flex items-center w-36'>
