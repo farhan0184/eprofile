@@ -20,11 +20,13 @@ const Profiles = () => {
   useEffect(() => {
     axiosBase.get("/profile")
       .then((res) => {
+        console.log(res?.data?.data);
         setProfiles(res?.data?.data);
       }).catch((error) => {
         console.log(error);
     })
   }, [])
+  // console.log(profiles)
   return (
     <div>
       <Container>

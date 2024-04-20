@@ -28,4 +28,18 @@ import PIcon from './imgIcon.jpg'
 import Frame from './Frame 611 (1).png'
 
 
-export {American,AppStore,Blob1,Blob2,Blob3, Character, Character2,Google, GooglePlay,Home1,Instagram, Linkedin, Logo,Logo1,Logo2, LogoMark, Master, Payoneer, Stripe, Success, Twitter, Visa, WhiteLogo, Youtube, Person, Company1, PIcon, Frame}
+import softronixs from "./company1.jpeg";
+import project1 from "./project1.png";
+import facebook from "./facebook.png";
+import linkedin from "./linkedin.png";
+import youtube from "./youtube.png";
+import x from "./twitter.png";
+import amazon from "./amazon.png";
+import pinterest from "./Pinterest.png";
+import reddit from "./Reddit.png";
+import tumblr from "./Tumblr.png";
+import vk from "./VK Logomark.png";
+import github from "./GitHub Logotype.png";
+
+
+export {American,AppStore,Blob1,Blob2,Blob3, Character, Character2,Google, GooglePlay,Home1,Instagram, Linkedin, Logo,Logo1,Logo2, LogoMark, Master, Payoneer, Stripe, Success, Twitter, Visa, WhiteLogo, Youtube, Person, Company1, PIcon, Frame, softronixs, project1, facebook, linkedin, youtube, x, amazon, pinterest, reddit, tumblr, vk, github}
