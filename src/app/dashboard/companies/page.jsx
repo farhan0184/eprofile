@@ -3,12 +3,14 @@ import { Company1 } from '@/assets/images'
 import CustomBtn from '@/components/share/CustomBtn'
 import { Eye, FilePenLine, Globe, Mail, Phone, Star, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export default function Companies() {
-
+    const route = useRouter()
     const handleAdd =()=>{
-        window.location.href = '/dashboard/companies/add-company'
+        // window.location.href = '/dashboard/companies/add-company'
+        route.push('/dashboard/companies/add-company')
     }
 
     return (

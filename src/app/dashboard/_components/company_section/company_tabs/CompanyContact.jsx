@@ -7,8 +7,11 @@ import { Instagram, Linkedin, LogoMark, Twitter, Youtube } from '@/assets/images
 import GroupBtn from '../../share/GroupBtn';
 import { axiosBase } from '@/hooks/axiosSecure';
 import { jsonToFormData } from '@/lib/utils';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function CompanyContact({ setValue, company, setCompany, userId }) {
+    const router = useRouter()
     const [data, setData] = React.useState({
         street: '',
         // house: '',
@@ -46,7 +49,7 @@ export default function CompanyContact({ setValue, company, setCompany, userId }
             },
         });
         console.log(res);
-        if(res.data.statusCode === 200){
+        if(res.data.statusCode === 201){
             toast.success(res.data.message, {
                 action: {
                     label: 'X',
@@ -54,8 +57,7 @@ export default function CompanyContact({ setValue, company, setCompany, userId }
                 },
             })
             setCompany(res.data.data)
-            // window.location.reload()
-            setValue('name')
+            router.push('/dashboard/companies')
 
         }
     }

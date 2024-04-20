@@ -8,8 +8,9 @@ import { Label } from '@/components/ui/label'
 import { CloudDownload } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
+import { jsonToFormData } from '@/lib/utils'
 
-export default function Projects({ setValue,profile, setProfile }) {
+export default function Projects({ setValue,profile, setProfile, profileData, updateProfile, userId }) {
     // profile?.project || 
     const [data, setData] = useState( {
         projectName: '',
@@ -18,6 +19,7 @@ export default function Projects({ setValue,profile, setProfile }) {
         projectPhoto: null,
         portfolioLink: ''
     })
+    console.log(data)
 
     const imgRef = useRef(null)
     const handleImgClk = () => {
@@ -40,9 +42,22 @@ export default function Projects({ setValue,profile, setProfile }) {
     const handlePrev = () => {
         setValue('volunteer')
     }
-    const handleNext = () => {
-        setProfile({...profile,project: data})
-        setValue('publications')
+    const handleNext = async () => {
+        if(!profileData){setProfile({...profile,project: data})
+        setValue('publications')}
+        else{
+            console.log(data)
+            const values = { project: data };
+            // console.log(values)
+            const formData = jsonToFormData(values);
+            const res = await updateProfile(formData, userId)
+            // console.log(res)
+            if (res.data.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('publications')
+            }
+        }
     }
     useEffect(() => {
         setData(profile?.project)
@@ -74,7 +89,7 @@ export default function Projects({ setValue,profile, setProfile }) {
                 
             </div>
             {/* <p>{JSON.stringify(data)}</p> */}
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData} />
         </div>
     )
 }

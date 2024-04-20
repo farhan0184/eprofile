@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import AuthLayout from './AuthLayout'
 import Footer from '@/components/share/Footer'
 import { useLoginStore, useProfileStore } from '@/store/userStore'

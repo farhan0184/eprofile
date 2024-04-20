@@ -24,7 +24,7 @@ const items = [
 
 ]
 
-export default function Languages({ setValue, profile, setProfile }) {
+export default function Languages({ setValue, profile, setProfile, profileData, updateProfile, userId }) {
     // profile?.language || 
     const [data, setData] = React.useState([{
         name: '',
@@ -39,9 +39,13 @@ export default function Languages({ setValue, profile, setProfile }) {
 
     const handleChange = (e, i) => {
         const { name, value } = e.target;
-        const onChangeVal = [...data];
-        onChangeVal[i][name] = value;
-        setData(onChangeVal)
+        const changeData = data.map((item, index) => {
+            let object = { ...item, [name]: value }
+            return index === i ? object : item
+        })
+        // const onChangeVal = [...data];
+        // onChangeVal[i][name] = value;
+        setData(changeData)
     }
     const handleDelete = (i) => {
         const deleteData = [...data];
@@ -52,9 +56,20 @@ export default function Languages({ setValue, profile, setProfile }) {
     const handlePrev = () => {
         setValue('member')
     }
-    const handleNext = () => {
+    const handleNext = async () => {
+        if(!profileData){
         setProfile({ ...profile, language: data })
-        setValue('volunteer')
+        setValue('volunteer')}
+        else{
+            const values = { language: data };
+            // console.log(values);
+            const res = await updateProfile(values, userId)
+            if (res?.data?.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('volunteer')
+            }
+        }
     }
     useEffect(() => {
         if (profile?.language) setData(profile?.language)
@@ -82,7 +97,7 @@ export default function Languages({ setValue, profile, setProfile }) {
             </div>
 
 
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData}/>
         </div>
     )
 }

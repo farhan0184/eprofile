@@ -65,16 +65,43 @@ export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
     error: null,
     loading: false,
     profileData: null,
-    setProfile: async (values) => {
+    setUserProfile: async (data) => {
         set((state) => { state.loading = true })
-        set((state) => {
-            state.profileData = values,
-                state.loading = false
-        })
+        try {
+            const res = await axiosBase.post("/profile", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            if (res.data.statusCode === 200) {
+                toast.success(res.data.message, {
+                    action: {
+                        label: 'X',
+                        onClick: () => console.log('Undo')
+                    },
+                })
 
+            }
+            set((state) => ({
+                profileData: res.data.data,
+                loading: false
+            }))
+            return res
+
+        } catch (error) {
+            set((state) => ({ error: state.error, loading: false }));
+            console.log(error)
+            // toast.error(error.message, {
+            //     action: {
+            //         label: 'X',
+            //         onClick: () => console.log('Undo')
+            //     },
+            // })
+            return
+        }
     },
     updateProfile: async (formData, userId) => {
-        console.log(formData, userId)
+        // console.log(formData, userId)
         set((state) => { state.loading = true })
         try {
             const res = await axiosBase.put(`/profile/${userId}`, formData, {
@@ -82,7 +109,7 @@ export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
                     "Content-Type": "multipart/form-data",
                 },
             })
-            console.log(res)
+            // console.log(res)
             if (res.data.statusCode === 200) {
                 toast.success(res.data.message, {
                     action: {

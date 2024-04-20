@@ -5,7 +5,7 @@ import ProfileInput from '../../share/ProfileInput'
 import { ProfileHeader } from '../..'
 import CustomBtn from '@/components/share/CustomBtn'
 
-export default function WorkExperience({ setValue, profile, setProfile }) {
+export default function WorkExperience({ setValue, profile, setProfile, profileData, updateProfile, userId }) {
     // profile?.experience ||
     const [data, setData] = React.useState([{
         company: '',
@@ -14,7 +14,7 @@ export default function WorkExperience({ setValue, profile, setProfile }) {
         responsibilities: ''
     }])
     const handleClick = () => {
-        setData(prev=>[...prev, {
+        setData(prev => [...prev, {
             company: '',
             jobTitle: '',
             dateOfEmployment: '',
@@ -24,9 +24,14 @@ export default function WorkExperience({ setValue, profile, setProfile }) {
 
     const handleChange = (e, i) => {
         const { name, value } = e.target;
-        const onChangeVal = [...data];
-        onChangeVal[i][name] = value;
-        setData(onChangeVal)
+
+        const changeData = data.map((item, index) => {
+            let object = { ...item, [name]: value }
+            return index === i ? object : item
+        })
+        // const onChangeVal = [...data];
+        // onChangeVal[i][name] = value;
+        setData(changeData)
     }
     const handleDelete = (i) => {
         const deleteData = [...data];
@@ -36,9 +41,21 @@ export default function WorkExperience({ setValue, profile, setProfile }) {
     const handlePrev = () => {
         setValue('education')
     }
-    const handleNext = () => {
-        setProfile({ ...profile, experience: data })
-        setValue('skills')
+    const handleNext = async () => {
+        if (!profileData) {
+            setProfile({ ...profile, experience: data })
+            setValue('skills')
+        }
+        else {
+            const values = { experience: data };
+            // console.log(values);
+            const res = await updateProfile(values, userId)
+            if (res?.data?.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('skills')
+            }
+        }
     }
     useEffect(() => {
         if (profile?.experience) setData(profile?.experience)
@@ -64,7 +81,7 @@ export default function WorkExperience({ setValue, profile, setProfile }) {
             <div className='md:mt-8 mt-10 md:flex md:justify-start  ' >
                 <CustomBtn style={'w-min text-2xl font-bold'} title={'+'} click={handleClick} />
             </div>
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData} />
         </div>
     )
 }

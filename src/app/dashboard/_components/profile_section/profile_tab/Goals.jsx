@@ -8,36 +8,38 @@ import { jsonToFormData } from '@/lib/utils'
 import { toast } from "sonner"
 import { useProfileStore } from '@/store/userStore'
 
-export default function Goals({ setValue, profile, userId }) {
-    const {setProfile} = useProfileStore()
+export default function Goals({ setValue, profile, setProfile, userId, profileData, updateProfile, setUserProfile }) {
 
-    const [data, setData] = React.useState(profile?.careerGoals || '')
-    
+    const [data, setData] = React.useState('')
+
 
     // console.log(user.id)
+    useEffect(() => {
+        setData(profile?.careerGoals)
+    }, [profile])
 
     const handlePrev = () => {
         setValue("hobbies");
     };
     const handleNext = async () => {
-        const values = { ...profile, careerGoals: data, createdBy: userId };
-        const formData = jsonToFormData(values);
-        const res = await axiosBase.post("/profile", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-        if(res.data.statusCode === 200){
-            toast.success(res.data.message, {
-                action: {
-                    label: 'X',
-                    onClick: () => console.log('Undo')
-                },
-            })
-            setProfile(values)
-            // window.location.reload()
-            setValue('name')
+        if (!profileData) {
+            const values = { ...profile, careerGoals: data, createdBy: userId };
+            const formData = jsonToFormData(values);
+            const res = await setUserProfile(formData)
+            if (res.data.statusCode === 200) {
 
+                setProfile(values)
+                setValue('name')
+
+            }
+        }
+        else {
+            const values = { careerGoals: data };
+            const res = await updateProfile(values, userId)
+            if (res.data.statusCode === 200) {
+                setProfile(res.data.data)
+                setValue('name')
+            }
         }
         // console.log(res);
     };
@@ -48,7 +50,7 @@ export default function Goals({ setValue, profile, userId }) {
             <div className='mb-10'>
                 <ProfileInput type={'text'} label={'Goals'} value={data} isStar={false} style={'profileInput h-12'} change={(e) => setData(e.target.value)} />
             </div>
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData}/>
         </div>
     )
 }

@@ -6,8 +6,9 @@ import ProfileLinkInput from '../../share/ProfileLinkInput'
 import { Instagram, Linkedin, LogoMark, Twitter, Youtube } from '@/assets/images'
 import { ProfileHeader } from '../..'
 import { useProfileStore } from '@/store/userStore'
+import { jsonToFormData } from '@/lib/utils'
 
-export default function ContactInfo({setValue,profile, setProfile, formData}) {
+export default function ContactInfo({setValue,profile, setProfile, profileData, updateProfile, userId}) {
     // const { loading, profile, setProfile } = useProfileStore()
     // profile?.contactInformation ||
     const [data, setData] = useState( {
@@ -37,11 +38,23 @@ export default function ContactInfo({setValue,profile, setProfile, formData}) {
     const handlePrev = () => {
         setValue('objective')
     }
-    const handleNext = () => {
+    const handleNext =  async() => {
         // console.log(data)
         // formData.append('contactInformation', JSON.stringify(data))
+        if(!profileData){
         setProfile({...profile, contactInformation:data})
-        setValue('education')
+        setValue('education')}
+        else{
+            const values = { contactInformation: data };
+            // const formData = jsonToFormData(values);
+            const res = await updateProfile(values, userId)
+            // console.log(res)
+            if (res.data.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('education')
+            }
+        }
     }
 
     useEffect(() => {
@@ -86,7 +99,7 @@ export default function ContactInfo({setValue,profile, setProfile, formData}) {
             </div>
 
             {/* <p>{JSON.stringify(data)}</p> */}
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData} />
         </div>
     )
 }

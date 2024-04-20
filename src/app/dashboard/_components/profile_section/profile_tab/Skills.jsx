@@ -20,7 +20,7 @@ const items = [
     }
 ]
 
-export default function Skills({ setValue, profile, setProfile }) {
+export default function Skills({ setValue, profile, setProfile, profileData, updateProfile, userId }) {
     // profile?.skills || 
     const [data, setData] = useState([{
         name: '',
@@ -36,9 +36,13 @@ export default function Skills({ setValue, profile, setProfile }) {
 
     const handleChange = (e, i) => {
         const { name, value } = e.target;
-        const onChangeVal = [...data];
-        onChangeVal[i][name] = value;
-        setData(onChangeVal)
+        const changeData = data.map((item, index) => {
+            let object = { ...item, [name]: value }
+            return index === i ? object : item
+        })
+        // const onChangeVal = [...data];
+        // onChangeVal[i][name] = value;
+        setData(changeData)
     }
     const handleDelete = (i) => {
         const deleteData = [...data];
@@ -48,10 +52,21 @@ export default function Skills({ setValue, profile, setProfile }) {
     const handlePrev = () => {
         setValue('work')
     }
-    const handleNext = () => {
+    const handleNext = async () => {
         // console.log(data)
+        if(!profileData){
         setProfile({ ...profile, skills: data })
-        setValue('member')
+        setValue('member')}
+        else{
+            const values = { skills: data };
+            // console.log(values);
+            const res = await updateProfile(values, userId)
+            if (res?.data?.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('member')
+            }
+        }
     }
     useEffect(() => {
         if (profile?.skills) {
@@ -79,7 +94,7 @@ export default function Skills({ setValue, profile, setProfile }) {
                 <CustomBtn style={'w-min text-2xl font-bold'} title={'+'} click={handleClick} />
             </div>
 
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData}/>
         </div>
     )
 }

@@ -4,16 +4,27 @@ import GroupBtn from '../../share/GroupBtn'
 import ProfileInput from '../../share/ProfileInput'
 import { ProfileHeader } from '../..'
 
-export default function Member({setValue, setProfile, profile}) {
+export default function Member({setValue, setProfile, profile, profileData, updateProfile, userId}) {
     // profile?.skills || 
     const [data, setData] = useState('')
 
     const handlePrev = () => {
         setValue('skills')
     }
-    const handleNext = () => {
+    const handleNext = async () => {
+        if(!profileData){
         setProfile({...profile, professionalMemberships: data})        
-        setValue('languages')
+        setValue('languages')}
+        else{
+            const values = { professionalMemberships: data };
+            // console.log(values);
+            const res = await updateProfile(values, userId)
+            if (res?.data?.statusCode === 200) {
+                setProfile(res.data.data)
+                //     // window.location.reload()
+                setValue('languages')
+            }
+        }
     }
     useEffect(() => {
         setData(profile?.professionalMemberships)
@@ -25,7 +36,7 @@ export default function Member({setValue, setProfile, profile}) {
                 <ProfileInput type={'text'} label={'Member'} value={data} isStar={false} style={'profileInput h-12'} change={(e) => setData(e.target.value)} />
             </div>
 
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={profileData} />
         </div>
     )
 }
