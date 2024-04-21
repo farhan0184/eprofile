@@ -14,7 +14,7 @@ export default function ProfileTabContents({ value, setValue }) {
         if (profileData)
             setProfile(profileData)
     }, [profileData])
-    // console.log(profileData)
+    console.log(profileData)
     return (
 
         <>

@@ -4,18 +4,20 @@ import CustomBtn from './CustomBtn'
 import { User } from 'lucide-react'
 import { useAuthStore } from '@/store/userStore'
 import Link from 'next/link'
+import { useAuth } from '@/app/auth/provider'
 
 export default function LoginBtn() {
-  const { user, logout } = useAuthStore()
+  const {signOut, isAuth} = useAuth()
+
   // console.log(user)
   return (
     <>
-      {user ?
+      {isAuth ?
         <div className='flex gap-4'>
 
           <Link href={'/dashboard'} className='text-white bg-primary p-2 rounded-lg'>Dashboard</Link>
           <CustomBtn style={'flex gap-2'} title={'Logout'} click={() => {
-            logout()
+            signOut()
             window.location.href = '/'
           }} />
         </div>

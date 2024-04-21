@@ -10,6 +10,7 @@ import Partnerships from "./Tabs/Partnerships";
 import Social from "./Tabs/Social";
 import Future from "./Tabs/Future";
 
+
 const MidTabs = () => {
   const [state, setState] = useState("Mission");
 

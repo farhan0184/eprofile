@@ -163,7 +163,7 @@ export const useCompanyStore = create(immer((set) => ({
     getCompanies: async () => {
         set((state) => { state.loading = true })
         try {
-            const res = await axiosBase.get("/companies/my-companies")
+            const res = await axiosBase.get("/companies/my/company")
             set((state) => {
                 state.companyData = res?.data?.data,
                 state.loading = false

@@ -1,5 +1,6 @@
+'use client'
 import Container from "@/components/share/Container";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import card from "../../assets/companies/card.png";
 import Image from "next/image";
@@ -13,8 +14,22 @@ import { IoLocationOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import Ratings from "@/components/Ratings/Ratings";
+import { axiosBase } from "@/hooks/axiosSecure";
+import { useRouter } from "next/navigation";
 
 const Company = () => {
+  const [profiles, setProfiles] = React.useState([]);
+  const router = useRouter()
+
+  useEffect(() => {
+    axiosBase.get("/companies")
+      .then((res) => {
+        console.log(res?.data?.data);
+        setProfiles(res?.data?.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+  }, [])
   return (
     <div>
       <Container>
@@ -51,14 +66,14 @@ const Company = () => {
         {/* card */}
         <main className="mb-7">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
+            {profiles?.map(
               (item, i) => (
-                <div key={i} className="border  boder-[#111111] ">
+                <div key={i} onClick={() => router.push( `/company/${item?._id}`)}  className="border  boder-[#111111] ">
                   <div className="flex flex-wrap justify-between  p-4 border-[#111111] pb-3 border-b">
                     <div className="flex flex-wrap gap-3">
                       <Image
                         className="rounded-md"
-                        src={card}
+                        src={item?.photo}
                         height={20}
                         width={90}
                         alt="card"
@@ -66,14 +81,14 @@ const Company = () => {
 
                       <div className="space-y-1">
                         <h3 className="text-[#111111] text-[23px]">
-                          Sapphire Software Solutions
+                          {item?.name}
                         </h3>
                         <p className="text-[14px] text-slate-500 font-normal">
-                          Leading USA App Development Company
+                          {item?.introduction}
                         </p>
                         <div className="flex items-center gap-x-3">
                           <div className="flex items-center gap-x-1">
-                            <Ratings ratings={5}/>
+                            <Ratings ratings={5} />
                           </div>
                           <p className="text-primary flex items-center gap-2 text-[14px] font-medium">
                             200+ review <FaAngleRight />

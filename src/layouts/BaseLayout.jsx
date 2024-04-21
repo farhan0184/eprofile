@@ -4,12 +4,13 @@ import { usePathname } from 'next/navigation'
 import React, { Suspense, useEffect } from 'react'
 import AuthLayout from './AuthLayout'
 import Footer from '@/components/share/Footer'
-import { useLoginStore, useProfileStore } from '@/store/userStore'
+import { useCompanyStore, useLoginStore, useProfileStore } from '@/store/userStore'
 import Navbar from '@/components/share/Navbar'
 
 
 export default function BaseLayout({ child }) {
     const path = usePathname()
+    
     return (
         <div suppressHydrationWarning={true}>
 

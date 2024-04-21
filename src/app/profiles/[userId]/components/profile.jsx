@@ -33,7 +33,7 @@ const SingleProfile = ({ userId }) => {
           <div
             className="bg-cover relative w-full bg-center h-[150px] md:h-[190px] lg:h-[220px] rounded-lg"
             style={{
-              backgroundImage: `url(${profile?.coverImage})`,
+              backgroundImage: `url(${profile?.coverPhoto})`,
               backgroundSize: "cover",
             }}
           ></div>

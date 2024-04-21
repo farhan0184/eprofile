@@ -1,4 +1,5 @@
 'use client'
+import { useAuth } from '@/app/auth/provider'
 import SideBar from '@/app/dashboard/_components/share/SideBar'
 import LoaderPage from '@/components/share/LoaderPage'
 
@@ -8,11 +9,13 @@ import React, { Suspense, useEffect } from 'react'
 export default function DashboardLayout({ child }) {
     const { profileData, getProfile } = useProfileStore()
     const {getCompanies} = useCompanyStore()
+    const {authUser} = useAuth()
+    console.log(authUser)
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'))
-        getProfile(user?.id)
-    }, [])
+        
+        getProfile(authUser?.id)
+    }, [authUser?.id])
     useEffect(() => {
         getCompanies()
     },[])

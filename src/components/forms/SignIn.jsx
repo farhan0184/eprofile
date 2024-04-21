@@ -14,6 +14,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from '@/store/userStore'
 import { axiosBase } from '@/hooks/axiosSecure'
+import { useAuth } from '@/app/auth/provider'
 
 
 
@@ -30,6 +31,7 @@ const formSchema = z.object({
 })
 
 export default function SignIn() {
+    const {signIn} =useAuth()
     const { setLogin } = useAuthStore()
     // 1. Define your form.
     const form = useForm({
@@ -45,16 +47,17 @@ export default function SignIn() {
 
         try {
             const res = await axiosBase.post('/auth/login', values)
+            console.log(res)
             if (res.data.statusCode === 200) {
 
-                setLogin(res.data.data)
+                signIn({auth: {token: res.data.data.token ?? ''}, user: res.data.data.user ?? ''})
                 toast.success(res.data.message, {
                     action: {
                         label: 'X',
                         onClick: () => console.log('Undo')
                     },
                 })
-                window.location.href = '/dashboard'
+                // window.location.href = '/dashboard'
             }
         } catch (error) {
             toast.error(error.message, {

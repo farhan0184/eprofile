@@ -3,6 +3,8 @@ import "./globals.css";
 import BaseLayout from "@/layouts/BaseLayout";
 
 import { Toaster, toast } from 'sonner'
+import Provider from "./auth/store";
+import AuthProvider from "./auth/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -14,7 +16,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
-
+        <Provider>
+          <AuthProvider>
+            
           <BaseLayout child={children} />
           <Toaster toastOptions={{
             classNames: {
@@ -26,6 +30,8 @@ export default function RootLayout({ children }) {
 
           }}
           />
+          </AuthProvider>
+        </Provider>
       </body>
     </html>
   );
