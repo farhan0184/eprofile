@@ -1,15 +1,18 @@
 
 import { GoVerified } from "react-icons/go";
 import Image from "next/image";
-import Ratings from "@/Components/Ratings/Ratings";
 
-import HeaderTabs from "@/Components/SingleProfile/HeaderTabs";
-import MidTabs from "@/Components/SingleProfile/MidTabs";
-import SingleProfilesContact from "@/Components/SingleProfile/SingleProfilesContact";
+
+
+
 import ReviewSummary from "@/Components/SingleProfile/ReviewSummary";
 import Container from "@/components/share/Container";
 import { Logo, Master } from "@/assets/images";
 import { axiosBase } from "@/hooks/axiosSecure";
+import HeaderTabs from "@/components/SingleProfile/HeaderTabs";
+import MidTabs from "@/components/SingleProfile/MidTabs";
+import SingleProfilesContact from "@/components/SingleProfile/SingleProfilesContact";
+import Ratings from "@/components/Ratings/Ratings";
 
 export default async function ComapanyId({ params }) {
     

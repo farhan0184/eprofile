@@ -1,17 +1,13 @@
 "use client"
+import { useState, useEffect } from "react";
 import { GoVerified } from "react-icons/go";
 import Image from "next/image";
 import Ratings from "@/Components/Ratings/Ratings";
 
 import { GoLink } from "react-icons/go";
 
-
-
-
-
-import { useState, useEffect } from 'react'
-import { axiosBase } from '@/hooks/axiosSecure'
 import { softronixs, project1, facebook, linkedin, youtube, x, amazon, pinterest, reddit, tumblr, vk, github } from "@/assets/images";
+import { axiosBase } from "@/hooks/axiosSecure";
 
 
 const SingleProfile = ({ userId }) => {
@@ -146,7 +142,7 @@ const SingleProfile = ({ userId }) => {
               <b>Softronixs system Ltd. </b>, (UI-UX Designer)
             </h3>
             <p>
-              As a  UI/UX designer, my responsibilities encompass creating
+              As a UI/UX designer, my responsibilities encompass creating
               seamless and <br /> delightful digital experiences. Here are key
               aspects of my role:
             </p>
@@ -203,7 +199,7 @@ const SingleProfile = ({ userId }) => {
                 <li>Organize monthly events, network with US alumni</li>
 
                 <li>
-                  Share how to hunt scholarships and US student's life
+                  Share how to hunt scholarships and US student s life
                   experiences to all students who have received offers from US
                   universities
                 </li>
@@ -235,7 +231,7 @@ const SingleProfile = ({ userId }) => {
                 <li>Organize monthly events, network with US alumni</li>
 
                 <li>
-                  Share how to hunt scholarships and US student's life
+                  Share how to hunt scholarships and US student s life
                   experiences to all students who have received offers from US
                   universities
                 </li>
@@ -268,7 +264,7 @@ const SingleProfile = ({ userId }) => {
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. <br /> Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s.
+                  industry s standard dummy text ever since the 1500s.
                 </p>
               </div>
               <div className="flex gap-2">
@@ -334,7 +330,7 @@ const SingleProfile = ({ userId }) => {
             <div className="space-y-1 flex flex-col">
               <span>
                 Quotes from colleagues, supervisors, or clients endorsing the
-                individual's skills and work ethic.
+                individual s skills and work ethic.
               </span>
             </div>
           </div>
@@ -346,7 +342,7 @@ const SingleProfile = ({ userId }) => {
             </h3>
             <div className="space-y-1 flex flex-col">
               <span>
-                A brief mention of the individual's personal interests or
+                A brief mention of the individuals personal interests or
                 hobbies, which can provide a <br /> glimpse into their
                 personality outside of work.
               </span>
@@ -360,7 +356,7 @@ const SingleProfile = ({ userId }) => {
             </h3>
             <div className="space-y-1 flex flex-col">
               <span>
-                A statement about the individual's future career ambitions, such
+                A statement about the individuals future career ambitions, such
                 as seeking new <br /> challenges, advancing in their field, or
                 contributing to a specific cause.
               </span>
