@@ -17,6 +17,7 @@ import { apiUrl } from "@/lib/routes"
 import { api } from "@/api"
 import { toast } from "sonner"
 import { redirect, useRouter } from "next/navigation"
+import { axiosBase } from "@/hooks/axiosSecure"
 
 const formSchema = z.object({
     firstName: z.string().min(2, {
@@ -93,7 +94,7 @@ export default function SignUp() {
             country: country,
             password: password
         }
-        api.post('/users', data).then((res) => {
+        axiosBase.post('/users', data).then((res) => {
             toast.success(res.data.message, {
                 action: {
                     label: 'X',

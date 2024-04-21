@@ -47,7 +47,7 @@ export default function SignIn() {
 
         try {
             const res = await axiosBase.post('/auth/login', values)
-            console.log(res)
+            // console.log(res)
             if (res.data.statusCode === 200) {
 
                 signIn({auth: {token: res.data.data.token ?? ''}, user: res.data.data.user ?? ''})
