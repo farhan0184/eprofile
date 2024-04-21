@@ -102,7 +102,12 @@ export default function SignUp() {
             })
             router.push('/sign-in')
         }).catch(err => {
-            console.log(err)
+            toast.error('registration failed give a valid email', {
+                action: {
+                    label: 'X',
+                    onClick: () => console.log('Undo')
+                },
+            })
         })
     }
     return (

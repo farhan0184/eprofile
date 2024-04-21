@@ -13,8 +13,10 @@ import Image from 'next/image'
 
 import React, { useState } from 'react'
 
+
 export default function SignInPage() {
     const [isClick, setIsClick] = useState(false)
+    
     return (
         <div className={`flex xl:w-[70%]  mx-auto items-center ${isClick ? "h-screen lg:h-max 2xl:h-screen  py-10" : "h-screen"}  `}>
             <div className='md:w-[50%] w-full'>
@@ -26,7 +28,7 @@ export default function SignInPage() {
                         </CardHeader>
                         <CardContent>
                             <ThirdPartyLogin />
-                            <CustomBtn title={'Sign In Email'} style={`h-12 w-full mt-2 ${isClick?'mb-10':'mb-2'}`} click={() => setIsClick(!isClick)} />
+                            <CustomBtn title={'Sign In Email'} style={`h-12 w-full mt-2 ${isClick ? 'mb-10' : 'mb-2'}`} click={() => setIsClick(!isClick)} />
                             {isClick && <SignIn />}
                             <FormQns qns={'New User?'} link={'/sign-up'} linkTitle={'Sign Up'} />
                         </CardContent>

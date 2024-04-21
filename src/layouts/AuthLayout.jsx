@@ -1,10 +1,13 @@
+'use client'
 
 import { Blob1, Blob2, Blob3 } from '@/assets/images'
 import Image from 'next/image'
 
+
 import React from 'react'
 
 export default function AuthLayout({child}) {
+    
     return (
         <div className={`bg-background    relative z-0`}>
 

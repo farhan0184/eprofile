@@ -60,7 +60,8 @@ export default function SignIn() {
                 // window.location.href = '/dashboard'
             }
         } catch (error) {
-            toast.error(error.message, {
+            console.log(error)
+            toast.error(error.response.data.message, {
                 action: {
                     label: 'X',
                     onClick: () => console.log('Undo')
