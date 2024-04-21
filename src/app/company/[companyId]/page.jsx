@@ -2,17 +2,12 @@
 import { GoVerified } from "react-icons/go";
 import Image from "next/image";
 
-
-
-
-import ReviewSummary from "@/Components/SingleProfile/ReviewSummary";
 import Container from "@/components/share/Container";
 import { Logo, Master } from "@/assets/images";
 import { axiosBase } from "@/hooks/axiosSecure";
 import HeaderTabs from "@/components/SingleProfile/HeaderTabs";
 import MidTabs from "@/components/SingleProfile/MidTabs";
 import SingleProfilesContact from "@/components/SingleProfile/SingleProfilesContact";
-import Ratings from "@/components/Ratings/Ratings";
 
 export default async function ComapanyId({ params }) {
     
@@ -68,7 +63,7 @@ export default async function ComapanyId({ params }) {
                             </p>
                             <div className="flex gap-3 items-center">
                                 <div className="flex gap-1 items-center">
-                                    <Ratings ratings={5} />
+                                    {/* <Ratings ratings={5} /> */}
                                 </div>
                                 <p className="text-slate-700 font-normal text-[18px]">
                                     19 reviews
@@ -113,7 +108,7 @@ export default async function ComapanyId({ params }) {
 
                                         <div className="flex items-center gap-2">
                                             <div className="flex items-center gap-x-1">
-                                                <Ratings ratings={5} />
+                                                {/* <Ratings ratings={5} /> */}
                                             </div>
                                             <p className="text-slate-500">(65)</p>
                                         </div>
@@ -133,7 +128,7 @@ export default async function ComapanyId({ params }) {
 
                 {/* review summary */}
 
-                <ReviewSummary />
+                {/* <ReviewSummary /> */}
             </Container>
         </div>
     )
