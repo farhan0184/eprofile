@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { GoVerified } from "react-icons/go";
 import Image from "next/image";
-import Ratings from "@/Components/Ratings/Ratings";
 
 import { GoLink } from "react-icons/go";
 
@@ -80,7 +79,7 @@ const SingleProfile = ({ userId }) => {
               </p>
               <div className="flex gap-3 items-center">
                 <div className="flex gap-1 items-center">
-                  <Ratings ratings={5} />
+                  {/* <Ratings ratings={5} /> */}
                 </div>
                 <p className="text-slate-700 font-normal text-[18px]">
                   19 reviews
