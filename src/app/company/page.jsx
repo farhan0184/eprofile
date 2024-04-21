@@ -69,7 +69,7 @@ const Company = () => {
             {profiles?.map(
               (item, i) => (
                 <div key={i} onClick={() => router.push( `/company/${item?._id}`)}  className="border  boder-[#111111] ">
-                  <div className="flex flex-wrap justify-between  p-4 border-[#111111] pb-3 border-b">
+                  <div className="flex flex-wrap justify-between  p-4 pb-3 ">
                     <div className="flex flex-wrap gap-3">
                       <Image
                         className="rounded-md"
