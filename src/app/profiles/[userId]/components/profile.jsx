@@ -91,7 +91,7 @@ const SingleProfile = ({ userId }) => {
       </div>
 
       <div className="width">
-        <div className="max-w-6xl h-full border border-[#000000] px-4 py-2 mx-auto">
+        <div className="max-w-6xl h-full border px-4 py-10 mx-auto">
           {/* objective */}
           <div className="space-y-2 mb-4 lg:mb-6 md:mb-5">
             <h3 className="font-semibold border-b-2 pb-1 inline-block border-[#FF6702] text-[19px] tracking-wide text-[#FF6702]">
