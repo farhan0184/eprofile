@@ -1,7 +1,7 @@
 'use client'
 import { Person } from '@/assets/images'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { sidebarList } from '@/lib/data'
 import { User } from 'lucide-react'
@@ -9,8 +9,14 @@ import { usePathname } from 'next/navigation'
 import CustomBtn from '../../../../components/share/CustomBtn'
 
 export default function SideBar() {
+    const [dashboard, setDashboard] = useState('')
     const path = usePathname()
-    // console.log()
+
+    useEffect(() => {
+        if (path.includes('/dashboard/companies')) {
+            setDashboard('/dashboard/companies')
+        }
+    }, [path])
     return (
         <div className='md:block hidden lg:w-[300px] md:w-[220px] pb-16 border-r-[2px]'>
             <div>
@@ -24,7 +30,7 @@ export default function SideBar() {
                 </div>
                 <ul className=''>
                     {sidebarList.map(item =>
-                        <li key={item.id} className={`hover:bg-gray-200 hover:text-primary hover:font-bold py-3 lg:px-12 px-5 ${path === item.link || path === item.link1 ? 'bg-gray-200 text-primary font-bold' : ''}`}><Link href={item.link} className='flex gap-2 '>{item.icon} <span>{item.title}</span></Link></li>
+                        <li key={item.id} className={`hover:bg-gray-200 hover:text-primary hover:font-bold py-3 lg:px-12 px-5 ${path === item.link || item.link === dashboard ? 'bg-gray-200 text-primary font-bold' : ''}`}><Link href={item.link} className='flex gap-2 '>{item.icon} <span>{item.title}</span></Link></li>
                     )}
                 </ul>
             </div>

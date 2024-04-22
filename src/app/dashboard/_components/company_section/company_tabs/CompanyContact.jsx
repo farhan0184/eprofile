@@ -74,32 +74,32 @@ export default function CompanyContact({ setValue, company, setCompany, userId }
                 <h2 className='text-xl text-gray-400 font-bold mb-5'>Address</h2>
                 <div className='formGap'>
                     <div className='doubleInput'>
-                        <ProfileInput type={'text'}  label={'Street'} name={'street'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput value={data?.street} type={'text'}  label={'Street'} name={'street'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
                         {/* <ProfileInput type={'text'} label={'House'} name={'house'} isStar={true} style={'profileInput h-12'} change={ handleChange} /> */}
                     </div>
                     <div className='doubleInput'>
-                        <ProfileInput type={'text'} label={'City'} name={'city'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
-                        <ProfileInput type={'text'} label={'State'} name={'state'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput value={data?.city } type={'text'} label={'City'} name={'city'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput type={'text'} value={data?.state}  label={'State'} name={'state'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
                     </div>
                     <div className='doubleInput'>
-                        <ProfileInput type={'text'} label={'Postal Code'} name={'postalCode'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
-                        <ProfileInput type={'text'} label={'Country'} name={'country'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput type={'text'} value={data?.postalCode} label={'Postal Code'} name={'postalCode'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput type={'text'} value={data?.country} label={'Country'} name={'country'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
                     </div>
                     <div className='doubleInput'>
-                        <ProfileInput type={'number'} label={'Mobile Number'} name={'mobileNumber'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
-                        <ProfileInput type={'email'} label={'Email'} name={'email'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput type={'number'} value={data?.mobileNumber} label={'Mobile Number'} name={'mobileNumber'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                        <ProfileInput type={'email'} value={data?.email} label={'Email'} name={'email'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
                     </div>
-                    <ProfileInput type={'text'} label={'Website'} name={'website'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
+                    <ProfileInput type={'text'} value={data?.website} label={'Website'} name={'website'} isStar={true} style={'profileInput h-12'} change={ handleChange} />
                 </div>
             </div>
             <div className='mb-10'>
                 <h2 className='text-xl text-gray-400 font-bold mb-5'>Social Link</h2>
                 <div className='formGap'>
-                    <ProfileLinkInput image={LogoMark} name={'facebook'} change={ handleChange} />
-                    <ProfileLinkInput image={Twitter} name={'twitter'} change={ handleChange} />
-                    <ProfileLinkInput image={Linkedin} name={'linkedin'} change={ handleChange} />
-                    <ProfileLinkInput image={Instagram} name={'instagram'} change={ handleChange} />
-                    <ProfileLinkInput image={Youtube} name={'youtube'} change={ handleChange} />
+                    <ProfileLinkInput image={LogoMark} name={'facebook'} change={ handleChange} value={data?.facebook}/>
+                    <ProfileLinkInput image={Twitter} name={'twitter'} value={data?.twitter} change={ handleChange} />
+                    <ProfileLinkInput image={Linkedin} name={'linkedin'} value={data?.linkedin} change={ handleChange} />
+                    <ProfileLinkInput image={Instagram} value={data?.instagram} name={'instagram'} change={ handleChange} />
+                    <ProfileLinkInput image={Youtube} value={data?.youtube} name={'youtube'} change={ handleChange} />
                 </div>
             </div>
 

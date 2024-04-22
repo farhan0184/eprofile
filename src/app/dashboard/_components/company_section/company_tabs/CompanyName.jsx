@@ -7,13 +7,14 @@ import ProfileInput from '../../share/ProfileInput'
 import CustomBtn from '@/components/share/CustomBtn'
 import { PIcon } from '@/assets/images'
 
-export default function CompanyName({setValue,company,setCompany}) {
+export default function CompanyName({ setValue, company, setCompany, isEdit }) {
     const [data, setData] = React.useState({
         name: '',
         username: '',
         photo: null,
-        coverPhoto:  null
+        coverPhoto: null
     })
+
 
     // const [coverImg, setCoverImg] = useState(null)
     // const [personImg, setPersonImg] = useState(null)
@@ -42,28 +43,32 @@ export default function CompanyName({setValue,company,setCompany}) {
         })
     }
 
-
+    // console.log(companyData)
 
     const handleUpdate = () => {
-        setCompany({...data})
-        setValue('intro')
+        if(!isEdit){
+            setCompany({ ...data })
+        setValue('intro')}
+        else{
+            console.log('logo')
+        }
     }
 
     useEffect(() => {
-        if(company){
-            setData({...data, name: company?.name, username:  company?.username, photo: company?.photo, coverPhoto: company?.coverPhoto})
+        if (company) {
+            setData({ ...data, name: company?.name, username: company?.username, photo: company?.photo, coverPhoto: company?.coverPhoto })
         }
-    },[company])
+    }, [company])
     return (
         <div>
             {/* image section */}
             <div className='relative'>
                 <div className='md:h-[35vh] h-[25vh] w-full bg-slate-300 rounded-xl relative'>
-                    {data?.coverPhoto && <Image src={URL.createObjectURL(data.coverPhoto)} alt='cover image' width={600} height={100} className='absolute top-0 h-full w-full rounded-xl object-cover' />}
+                    {data?.coverPhoto && <Image src={data?.coverPhoto && data?.coverPhoto instanceof File ? URL.createObjectURL(data?.coverPhoto) : data?.coverPhoto} alt='cover image' width={600} height={100} className='absolute top-0 h-full w-full rounded-xl object-cover' />}
                 </div>
                 <div onClick={handlePersonImgClk} className='bg-slate-300 md:w-[170px] w-[120px] md:h-[170px] h-[120px] rounded-full absolute md:-bottom-[4.8rem] -bottom-[3rem] md:left-1/2 md:-translate-x-1/2 left-5'>
                     <input type="file" name="photo" className='hidden' ref={personImgRef} onChange={handlePersonImgCng} />
-                    {data?.photo && <Image src={URL.createObjectURL(data.photo)} alt='person' width={100} height={100} className='w-full h-full rounded-full  object-cover' />}
+                    {data?.photo && <Image src={data?.photo && data?.photo instanceof File ? URL.createObjectURL(data?.photo) : data?.photo} alt='person' width={100} height={100} className='w-full h-full rounded-full  object-cover' />}
                     <div className='text-primary absolute bottom-0 right-4 p-1 rounded-full bg-[#ffe8d9]'>
                         <Camera />
                     </div>
@@ -81,14 +86,14 @@ export default function CompanyName({setValue,company,setCompany}) {
             {/* input section */}
             <div className='mb-10 mt-20 '>
                 <div className='space-y-4 mb-10'>
-                    <ProfileInput value={data?.name||''} name={'name'} type={'text'} label={'Company Name'} isStar={true} style={'profileInput h-12'} change={(e) => setData({ ...data, name: e.target.value })} />
-                    <ProfileInput value={data?.username||''} name={'username'} type={'text'} label={'Company Username'} isStar={true} style={'profileInput h-12'} change={(e) => setData({ ...data, username: e.target.value })} />
+                    <ProfileInput value={data?.name || ''} name={'name'} type={'text'} label={'Company Name'} isStar={true} style={'profileInput h-12'} change={(e) => setData({ ...data, name: e.target.value })} />
+                    <ProfileInput value={data?.username || ''} name={'username'} type={'text'} label={'Company Username'} isStar={true} style={'profileInput h-12'} change={(e) => setData({ ...data, username: e.target.value })} />
                 </div>
 
 
                 {/* <p>{JSON.stringify(data)}</p> */}
                 <div className=' flex justify-end   right-3' >
-                    <CustomBtn style={'w-min'} title={'Save & Next'} click={handleUpdate} />
+                    <CustomBtn style={'w-min'} title={isEdit?'Update & Next':'Save & Next'} click={handleUpdate} />
                 </div>
             </div>
         </div>

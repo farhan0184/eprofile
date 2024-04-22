@@ -17,7 +17,7 @@ export default function Companies() {
     }
 
     const { loading,companyData } = useCompanyStore()
-    console.log(companyData)
+    // console.log(companyData)
     
     return (
         <div className='container'>
@@ -66,7 +66,7 @@ export default function Companies() {
                                 </div>
                                 <div className='w-1/4  flex items-center justify-between gap-3 px-2'>
                                     <Eye size={20} />
-                                    <FilePenLine size={20} />
+                                    <FilePenLine onClick={()=>route.push(`/dashboard/companies/${item._id}`)} className='cursor-pointer' size={20} />
                                     <Trash2 size={20} />
                                 </div>
                             </div>

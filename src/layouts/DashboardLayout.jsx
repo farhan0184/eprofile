@@ -10,7 +10,7 @@ export default function DashboardLayout({ child }) {
     const { profileData, getProfile } = useProfileStore()
     const {getCompanies} = useCompanyStore()
     const {authUser} = useAuth()
-    console.log(authUser)
+    // console.log(authUser)
 
     useEffect(() => {
         
