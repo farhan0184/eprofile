@@ -1,13 +1,20 @@
 'use client'
 
+import { useAuth } from '@/app/auth/provider';
 import { Blob1, Blob2, Blob3 } from '@/assets/images'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 
 
 import React from 'react'
 
 export default function AuthLayout({child}) {
-    
+    const { isAuth } = useAuth();
+    const router = useRouter();
+
+    if (isAuth) {
+        router.push("/dashboard");
+    }
     return (
         <div className={`bg-background    relative z-0`}>
 

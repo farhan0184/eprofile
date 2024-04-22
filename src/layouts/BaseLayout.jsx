@@ -11,12 +11,7 @@ import { useAuth } from '@/app/auth/provider'
 
 export default function BaseLayout({ child }) {
     const path = usePathname()
-    const { isAuth } = useAuth();
-    const router = useRouter();
-
-    if (isAuth) {
-        router.push("/dashboard");
-    }
+    
     
     return (
         <div suppressHydrationWarning={true}>
