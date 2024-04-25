@@ -6,8 +6,10 @@ import React, { useEffect } from 'react'
 import ProfileInput from '../../share/ProfileInput'
 import CustomBtn from '@/components/share/CustomBtn'
 import { PIcon } from '@/assets/images'
+import { jsonToFormData } from '@/lib/utils'
+import { axiosBase } from '@/hooks/axiosSecure'
 
-export default function CompanyName({ setValue, company, setCompany, isEdit }) {
+export default function CompanyName({ setValue, company, setCompany, isEdit, companyId, updateSingleCompany }) {
     const [data, setData] = React.useState({
         name: '',
         username: '',
@@ -15,9 +17,6 @@ export default function CompanyName({ setValue, company, setCompany, isEdit }) {
         coverPhoto: null
     })
 
-
-    // const [coverImg, setCoverImg] = useState(null)
-    // const [personImg, setPersonImg] = useState(null)
     const imgRef = React.useRef(null)
     const personImgRef = React.useRef(null)
     const handleImgClk = () => {
@@ -45,12 +44,24 @@ export default function CompanyName({ setValue, company, setCompany, isEdit }) {
 
     // console.log(companyData)
 
-    const handleUpdate = () => {
-        if(!isEdit){
+    const handleUpdate = async () => {
+        if (!isEdit) {
             setCompany({ ...data })
-        setValue('intro')}
-        else{
-            console.log('logo')
+            setValue('intro')
+        }
+        else {
+            // console.log(data)
+
+            const formData = jsonToFormData(data);
+            // console.log(typeof(formData));
+            const res = await updateSingleCompany(formData, companyId)
+            
+            // console.log(res)
+            if (res?.data?.statusCode === 200) {
+                setCompany(res?.data?.data)
+                //     // window.location.reload()
+                setValue('intro')
+            }
         }
     }
 
@@ -93,7 +104,7 @@ export default function CompanyName({ setValue, company, setCompany, isEdit }) {
 
                 {/* <p>{JSON.stringify(data)}</p> */}
                 <div className=' flex justify-end   right-3' >
-                    <CustomBtn style={'w-min'} title={isEdit?'Update & Next':'Save & Next'} click={handleUpdate} />
+                    <CustomBtn style={'w-min'} title={isEdit ? 'Update & Next' : 'Save & Next'} click={handleUpdate} />
                 </div>
             </div>
         </div>

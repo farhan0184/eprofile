@@ -1,14 +1,14 @@
 'use client'
 import { Person } from '@/assets/images'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { sidebarList } from '@/lib/data'
 import { User } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import CustomBtn from '../../../../components/share/CustomBtn'
 
-export default function SideBar() {
+export default function SideBar({ image }) {
     const [dashboard, setDashboard] = useState('')
     const path = usePathname()
 
@@ -21,7 +21,7 @@ export default function SideBar() {
         <div className='md:block hidden lg:w-[300px] md:w-[220px] pb-16 border-r-[2px]'>
             <div>
                 <div className='mt-5'>
-                    <Image src={Person} alt='person' width={100} height={100} className='rounded-full w-24 h-24 object-cover mx-auto' />
+                    <Image src={image} alt='person' width={100} height={100} className='rounded-full w-24 h-24 object-cover mx-auto' />
                 </div>
                 <div className='flex flex-col gap-2 justify-center items-center my-4'>
                     <CustomBtn style={'smallBtn'} title={'In Review'} />

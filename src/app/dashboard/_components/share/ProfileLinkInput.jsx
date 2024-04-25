@@ -10,7 +10,7 @@ export default function ProfileLinkInput({image, name, change,value}) {
             <Image src={image} alt={name} className='h-5 w-5' />
             <p className=''>Linkedin</p>
         </div>
-        <ProfileInput style='profileInput h-12' defaultValue={value} name={name} change={change}/>
+        <ProfileInput style='profileInput h-12' value={value} name={name} change={change}/>
     </div>
   )
 }

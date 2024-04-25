@@ -13,7 +13,7 @@ import { ProfileLoader } from '../..'
 
 
 const Name = memo(function Name({ setValue, setProfile, profile, userId, profileData, updateProfile }) {
-
+    // console.log(userId)
     const [data, setData] = useState({
         fullName: profile?.fullName ?? '',
         coverPhoto: profile?.coverPhoto ?? null,
@@ -62,14 +62,15 @@ const Name = memo(function Name({ setValue, setProfile, profile, userId, profile
             setValue('title')
         }
         else {
-            const values = { ...data };
-            const formData = jsonToFormData(values);
+            console.log(data)
+            const formData = jsonToFormData(data);
+            console.log(formData);
             const res = await updateProfile(formData, userId)
             // console.log(res)
-            if (res.data.statusCode === 200) {
+            if (res?.data?.statusCode === 200) {
                 setProfile(res.data.data)
                 //     // window.location.reload()
-                setValue('title')
+                // setValue('title')
             }
 
         }

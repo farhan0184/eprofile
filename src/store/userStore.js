@@ -61,7 +61,9 @@ export const useAuthStore = create(immer((set) => ({
     }
 })))
 
-export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
+
+// profile
+export const useProfileStore = create(immer((set) => ({
     error: null,
     loading: false,
     profileData: null,
@@ -153,9 +155,10 @@ export const useProfileStore = create(immer(subscribeWithSelector((set) => ({
         }
     }
 
-}))))
+})))
 
 
+// company
 export const useCompanyStore = create(immer((set) => ({
     error: null,
     loading: false,
@@ -166,12 +169,83 @@ export const useCompanyStore = create(immer((set) => ({
             const res = await axiosBase.get("/companies/my/company")
             set((state) => {
                 state.companyData = res?.data?.data,
-                state.loading = false
+                    state.loading = false
             })
             return res
 
         } catch (error) {
             set((state) => ({ error: error, loading: false }));
+            return
+        }
+    },
+    setSingleCompany: async (formData) => {
+        set((state) => {
+            state.loading = true
+        })
+        try {
+            const res = await axiosBase.post("/companies", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            
+            if (res?.data?.statusCode === 201) {
+                toast.success(res?.data?.message, {
+                    action: {
+                        label: 'X',
+                        onClick: () => console.log('Undo')
+                    },
+                })
+            }
+            set((state) => ({
+                loading: false
+            }))
+            return res
+        } catch (error) {
+            set((state) => ({ error: state.error, loading: false }));
+            console.log(error)
+            // toast.error(error.message, {
+            //     action: {
+            //         label: 'X',
+            //         onClick: () => console.log('Undo')
+            //     },
+            // })
+            return
+        }
+    },
+    updateSingleCompany: async (formData, id) => {
+        // console.log(formData, id);
+        set((state) => { state.loading = true })
+        try {
+            const res = await axiosBase.put(`/companies/${id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            if (res?.data?.statusCode === 200) {
+                toast.success(res.data.message, {
+                    action: {
+                        label: 'X',
+                        onClick: () => console.log('Undo')
+                    },
+                })
+
+            }
+            set((state) => ({
+                loading: false
+            }))
+            return res
+
+
+        } catch (error) {
+            set((state) => ({ error: state.error, loading: false }));
+            console.log(error)
+            // toast.error(error.message, {
+            //     action: {
+            //         label: 'X',
+            //         onClick: () => console.log('Undo')
+            //     },
+            // })
             return
         }
     }

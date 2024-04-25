@@ -4,7 +4,7 @@ import { ProfileHeader } from '../..'
 import ProfileTextArea from '../../share/ProfileTextArea'
 import GroupBtn from '../../share/GroupBtn'
 
-export default function CompanyGoals({ setValue, company, setCompany }) {
+export default function CompanyGoals({ setValue, company, setCompany, isEdit, companyId, updateSingleCompany }) {
     const [data, setData] = React.useState('')
 
     useEffect(() => {
@@ -16,9 +16,18 @@ export default function CompanyGoals({ setValue, company, setCompany }) {
     const handlePrev = () => {
         setValue('responsibility')
     }
-    const handleNext = () => {
+    const handleNext = async() => {
+        if(!isEdit){
         setCompany({ ...company, goals: data })
-        setValue('contact')
+        setValue('contact')}
+        else{
+            const res = await updateSingleCompany({ goals: data }, companyId)
+            if (res?.data?.statusCode === 200) {
+                setCompany(res?.data?.data)
+                //     // window.location.reload()
+                setValue('contact')
+            }
+        }
     }
     return (
         <div>
@@ -26,7 +35,7 @@ export default function CompanyGoals({ setValue, company, setCompany }) {
             <div className='mb-10'>
                 <ProfileTextArea type={'text'} name={'goals'} value={data} change={(e) => setData(e.target.value)} label={'Future Goals'} isStar={false} style={'profileInput h-28'} />
             </div>
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={isEdit}/>
         </div>
     )
 }

@@ -21,8 +21,8 @@ export default function Navbar() {
                     <ul className='flex gap-4'>
                         <li><Link href='/company'>Companies</Link></li>
                         <li><Link href='/profiles'>Profiles</Link></li>
-                        {/* <li><Link href='/services'>Services</Link></li>
-                        <li><Link href='/press'>Press</Link></li> */}
+                        <li><Link href='/services'>Services</Link></li>
+                        <li><Link href='/press'>Press</Link></li>
                     </ul>
                     <LoginBtn />
 

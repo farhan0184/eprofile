@@ -7,7 +7,7 @@ import CustomBtn from '@/components/share/CustomBtn'
 import GroupBtn from '../../share/GroupBtn'
 import moment from 'moment'
 
-export default function Executives({ setValue, company, setCompany }) {
+export default function Executives({ setValue, company, setCompany, isEdit, companyId, updateSingleCompany }) {
     const [data, setData] = React.useState([{
         name: '',
         designation: "",
@@ -53,9 +53,19 @@ export default function Executives({ setValue, company, setCompany }) {
     const handlePrev = () => {
         setValue('history')
     }
-    const handleNext = () => {
+    // console.log(company);
+    const handleNext = async () => {
+        if(!isEdit){
         setCompany({ ...company, founder: data })
-        setValue('location')
+        setValue('location')}
+        else{
+            const res = await updateSingleCompany({ founder: data }, companyId)
+            if (res?.data?.statusCode === 200) {
+                setCompany(res?.data?.data)
+                //     // window.location.reload()
+                setValue('location')
+            }
+        }
     }
     return (
         <div className=''>
@@ -82,7 +92,7 @@ export default function Executives({ setValue, company, setCompany }) {
                     <CustomBtn style={'w-min text-2xl font-bold'} title={'+'} click={handleClick} />
                 </div>
                 {/* <p>{JSON.stringify(data)}</p> */}
-                <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+                <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={isEdit}/>
             </div>
         </div>
     )

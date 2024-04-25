@@ -4,7 +4,7 @@ import React from 'react'
 import { CompanyTabContents, TabLists } from '../../_components'
 import { addCompanyTabList } from '@/lib/data'
 
-export default function TabSection({companyId}) {
+export default function TabSection({companyId, isEdit}) {
 
     let search = useSearchParams()
     search = search.get('tab')
@@ -21,7 +21,7 @@ export default function TabSection({companyId}) {
             <TabLists data={addCompanyTabList} value={value} setValue={setValue} />
             <div className='2xl:w-[70%] md:w-[63%] w-[95%]  mx-auto flex justify-end'>
                 <div className='md:w-[95%] w-full  '>
-                    <CompanyTabContents value={value} setValue={setValue} companyId={companyId}/>
+                    <CompanyTabContents value={value} setValue={setValue} companyId={companyId?? ''} isEdit={isEdit}/>
                 </div>
             </div>
         </section>

@@ -4,7 +4,7 @@ import { ProfileHeader } from '../..'
 import ProfileTextArea from '../../share/ProfileTextArea'
 import GroupBtn from '../../share/GroupBtn'
 
-export default function Responsibility({ setValue,company, setCompany }) {
+export default function Responsibility({ setValue,company, setCompany, isEdit, companyId, updateSingleCompany }) {
     const [data, setData] = useState('')
     useEffect(() => {
         if(company){ setData(company?.responsibility)}
@@ -14,8 +14,17 @@ export default function Responsibility({ setValue,company, setCompany }) {
         setValue('partnerships')
     }
     const handleNext = () => {
+        if(!isEdit){
         setCompany({ ...company, responsibility: data })
-        setValue('goals')
+        setValue('goals')}
+        else{
+            const res = updateSingleCompany({ responsibility: data }, companyId)
+            if (res?.data?.statusCode === 200) {
+                setCompany(res?.data?.data)
+                //     // window.location.reload()
+                setValue('goals')
+            }
+        }
     }
     return (
         <div>
@@ -23,7 +32,7 @@ export default function Responsibility({ setValue,company, setCompany }) {
             <div className='mb-10'>
                 <ProfileTextArea type={'text'} name={'responsibility'} value={data} change={(e) => setData(e.target.value)} label={'Responsibility'} isStar={false} style={'profileInput h-28'} />
             </div>
-            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} />
+            <GroupBtn handlePrev={handlePrev} handleNext={handleNext} profileData={isEdit}/>
         </div>
     )
 }

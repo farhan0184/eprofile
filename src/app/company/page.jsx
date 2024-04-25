@@ -24,7 +24,7 @@ const Company = () => {
   useEffect(() => {
     axiosBase.get("/companies")
       .then((res) => {
-        console.log(res?.data?.data);
+        // console.log(res?.data?.data);
         setProfiles(res?.data?.data);
       }).catch((error) => {
         console.log(error);
