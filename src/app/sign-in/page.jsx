@@ -32,6 +32,8 @@ export default function SignInPage() {
                             {isClick && <SignIn />}
                             <FormQns qns={'New User?'} link={'/sign-up'} linkTitle={'Sign Up'} />
                         </CardContent>
+                        <p>Email: farhan2@example.com</p>
+                        <p>Password: password12345</p>
 
 
                     </Card>

@@ -12,7 +12,7 @@ import LoadingSVG from '@/components/share/LoadingSVG'
 import { ProfileLoader } from '../..'
 
 
-const Name = memo(function Name({ setValue, setProfile, profile, userId, profileData, updateProfile }) {
+function Name({ setValue, setProfile, profile, userId, profileData, updateProfile }) {
     // console.log(userId)
     const [data, setData] = useState({
         fullName: profile?.fullName ?? '',
@@ -115,7 +115,7 @@ const Name = memo(function Name({ setValue, setProfile, profile, userId, profile
         </div>
 
     )
-})
+}
 
 export default Name
 
